@@ -18,4 +18,17 @@ RUN apk --no-cache --update add bash wget git && \
     apk del wget && \
     sbt sbtVersion
 
-ENTRYPOINT ["sbt"]
+RUN apk -v --update add \
+    python \
+    py-pip \
+    groff \
+    less \
+    mailcap \
+    && \
+    pip install --upgrade awscli==1.14.5 s3cmd==2.0.1 python-magic && \
+    apk -v --purge del py-pip && \
+    rm /var/cache/apk/*
+
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
