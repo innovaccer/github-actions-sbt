@@ -19,14 +19,10 @@ fi
 
 sbt clean compile assembly
 
-jar_path="target/scala_2.10/data-sync.jar"
+jar_path="/github/workspace/target/scala_2.10/data-sync.jar"
 mv ${jar_path} target/scala_2.10/data-sync_5.6.jar
-# Upload jar to bucket
 python -m awscli s3 cp target/scala_2.10/data-sync_5.6.jar s3://${BUCKET_NAME}/share/lib/v${releaseVersion}/
 
 sbt -DelasticVersion=2.3 clean compile assembly
-
-jar_path="target/scala_2.10/data-snc.jar"
 mv ${jar_path} target/scala_2.10/data-sync_2.3.jar
-
 python -m awscli s3 cp target/scala_2.10/data-sync_2.3.jar s3://${BUCKET_NAME}/share/lib/v${releaseVersion}/
