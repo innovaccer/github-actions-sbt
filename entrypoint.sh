@@ -19,8 +19,7 @@ fi
 
 sbt clean compile assembly
 
-jar_path="target/scala_2.10/data-sync.jar"
-pwd
+jar_path="/github/workspace/target/scala_2.10/data-sync.jar"
 python -m awscli s3 cp ${jar_path} s3://${BUCKET_NAME}/share/lib/v${releaseVersion}/data-sync_5.6.jar
 
 sbt -DelasticVersion=2.3 clean compile assembly
