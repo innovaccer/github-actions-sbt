@@ -5,7 +5,7 @@ LABEL "com.github.actions.description"="Executes sbt build commands"
 LABEL "com.github.actions.icon"="box"
 LABEL "com.github.actions.color"="blue"
 
-ENV sbt_version 1.1.4
+ENV sbt_version 0.13.8
 ENV sbt_home /usr/local/sbt
 ENV PATH ${PATH}:${sbt_home}/bin
 
