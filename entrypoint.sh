@@ -20,6 +20,8 @@ fi
 sbt clean compile assembly
 
 jar_path="/github/workspace/target/scala-2.10/data-sync.jar"
+mkdir -p ~/.aws
+touch ~/.aws/config
 echo "[profile ga]
 role_arn = ${AWS_IAM_ROLE}
 credential_source = Ec2InstanceMetadata" > ~/.aws/config
