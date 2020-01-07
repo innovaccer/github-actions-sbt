@@ -20,7 +20,10 @@ fi
 sbt clean compile assembly
 
 jar_path="/github/workspace/target/scala-2.10/data-sync.jar"
-python -m awscli s3 cp ${jar_path} s3://${BUCKET_NAME}/share/lib/v${releaseVersion}/data-sync_5.6.jar
+echo "[profile ga]
+role_arn = ${AWS_IAM_ROLE}
+credential_source = Ec2InstanceMetadata" > ~/.aws/config
+python -m awscli s3 cp ${jar_path} s3://${BUCKET_NAME}/share/lib/v${releaseVersion}/data-sync_5.6.jar --profile ga
 
 sbt -DelasticVersion=2.3 clean compile assembly
-python -m awscli s3 cp ${jar_path} s3://${BUCKET_NAME}/share/lib/v${releaseVersion}/data-sync_2.3.jar
+python -m awscli s3 cp ${jar_path} s3://${BUCKET_NAME}/share/lib/v${releaseVersion}/data-sync_2.3.jar --profile ga
