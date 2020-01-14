@@ -39,5 +39,21 @@ sbt clean compile assembly
 
 jar_path="$(grep "\"jar\": .*" project/Jobs | awk -F ":" '{print $2;}' | sed "s/\"//g")"
 
-# Upload jar to bucket
-python -m awscli s3 cp ${jar_path} s3://${BUCKET_NAME}/share/lib/v${releaseVersion}/
+# Upload jar for csv parser to bucket
+python -m awscli s3 cp ${jar_path} s3://${BUCKET_NAME}/share/lib/v${releaseVersion}/parsing_csv.jar
+
+# Upload jar for parsing api to bucket
+
+python -m awscli s3 cp ${jar_path} s3://${BUCKET_NAME}/share/lib/v${releaseVersion}/parsing_api.jar
+
+# Upload jar for cclf parser to bucket
+
+python -m awscli s3 cp ${jar_path} s3://${BUCKET_NAME}/share/lib/v${releaseVersion}/parsing_cclf.jar
+
+# Upload jar for hl7 parser to bucket
+
+python -m awscli s3 cp ${jar_path} s3://${BUCKET_NAME}/share/lib/v${releaseVersion}/parsing_hl7.jar
+
+# Upload jar for x12 parser to bucket
+
+python -m awscli s3 cp ${jar_path} s3://${BUCKET_NAME}/share/lib/v${releaseVersion}/parsing_x12.jar
